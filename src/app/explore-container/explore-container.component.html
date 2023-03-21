@@ -1,4 +1,13 @@
-<div id="container">
-  <strong>{{ name }}</strong>
+<div class="flex flex-col w-full h-full ">
+ 
+  <div *ngIf="name == 'vivencias'" class="flex flex-col w-full h-full relative ">
+    <h1 class="tex-white z-20 justify-center items-center absolute">Hola</h1>
+  </div>
+  <div *ngIf="name == 'agregarVivencias'" class="flex flex-col w-full h-full ">
+    <h1>Hola</h1>
+  </div>
+  <div *ngIf="name == 'info'" class="flex flex-col w-full h-full ">
+    <h1>Hola</h1>
+  </div>
   <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
 </div>
