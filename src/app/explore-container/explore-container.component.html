@@ -1,13 +1,106 @@
 <div class="flex flex-col w-full h-full ">
- 
-  <div *ngIf="name == 'vivencias'" class="flex flex-col w-full h-full relative ">
-    <h1 class="tex-white z-20 justify-center items-center absolute">Hola</h1>
+  <!--listado vivencias tab-->
+  <div *ngIf="name == 'vivencias'" class="tab-container">
+    <div class="flex flex-col w-full ">
+      <!-- boton borrar todo -->
+      <div class="flex w-full justify-end mb-5">
+        <button class="bg-[#655b5a] w-36 font-bold mt-5 hover:bg-red-500 hover:scale-105 duration-150  flex items-center justify-center border border-[#545452] hover:border-[#204d74]/30 text-sm text-white p-1 py-1.5 mx-3 rounded px-3">Borrar todo</button>
+      </div>
+      <!-- tabla de listado de vivencias -->
+        <div class="border p-4">
+          <div class="flex w-full items-center justify-between">
+            <h1 class="font-bold text-xl my-2">Vivencia 1</h1>
+            <p>23/4/2023</p>
+          </div>
+          <img src="../../assets//nasser.jpg" alt="" class="">
+          <p class="text-justify p-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum ratione doloribus dignissimos reprehenderit tempora dolorem molestias vero, excepturi eligendi natus nulla labore quaerat dolores modi, eveniet quisquam cum, iste ullam!</p>
+        </div>
+    </div>
   </div>
-  <div *ngIf="name == 'agregarVivencias'" class="flex flex-col w-full h-full ">
-    <h1>Hola</h1>
+  <!--Agregar vivencias tab-->
+  <div *ngIf="name == 'agregarVivencias'" class="tab-container">
+    <form [formGroup]="agregarVivenciasForm" (ngSubmit)="agregarVivencias()"
+      class="flex flex-col w-full h-full bg-white">
+      <!--titulo-->
+      <div class="flex flex-col justify-center items-center p-1 w-full ">
+        <div class="flex flex-col w-full justify-start items-center my-2">
+          <label for="" class="w-11/12 my-2 text-[#655b5a] font-semibold">Título</label>
+          <input formControlName="titulo" type="text" id="titulo" name="emil"
+            class="bg-white border border-[#655b5a] py-3.5 px-2 w-11/12 outline-none" placeholder="Ingrese un titulo">
+        </div>
+        <span *ngIf="agregarVivenciasForm.get('titulo')?.hasError('required') && agregarVivenciasForm.get('titulo')?.touched"
+          class="text-red-500 flex w-full ml-16">
+          El titulo es requerido
+        </span>
+      </div>
+      <!--fecha-->
+      <div class="flex flex-col justify-center items-center p-1 w-full ">
+        <div class="flex flex-col w-full justify-center items-center my-2">
+          <label for="" class="w-11/12 my-2 text-[#655b5a] font-semibold">Fecha</label>
+          <input formControlName="fecha" type="date" id="fecha" name="fecha"
+            class="bg-white border border-[#655b5a] py-3.5 px-2 w-11/12 outline-none rounded outline"
+            placeholder="fecha">
+        </div>
+        <span *ngIf="agregarVivenciasForm.get('fecha')?.hasError('required') && agregarVivenciasForm.get('fecha')?.touched"
+          class="text-red-500 flex w-full ml-16">La fecha es requerida</span>
+      </div>
+      <!--descripcion-->
+      <div class="flex flex-col justify-center items-center p-1 w-full ">
+        <div class="flex flex-col w-full justify-start items-center my-2">
+          <label for="" class="w-11/12 my-2 text-[#655b5a] font-semibold">Descripción</label>
+          <textarea formControlName="descripcion"
+            class="bg-white border border-[#655b5a] py-3.5 px-2 w-11/12 outline-none"></textarea>
+        </div>
+        <span
+          *ngIf="agregarVivenciasForm.get('descripcion')?.hasError('required') && agregarVivenciasForm.get('descripcion')?.touched"
+          class="text-red-500 flex w-full ml-16">
+          La descripcion es requerida
+        </span>
+      </div>
+      <!--foto-->
+      <div class="flex flex-col justify-center items-center p-1 w-full ">
+        <div class="flex flex-col w-full justify-center items-center">
+          <label for="" class="w-11/12 my-2 text-[#655b5a] font-semibold">foto</label>
+          <input formControlName="foto" type="file" (change)="onFileSelected($event)" accept="image/*" id="foto"
+          name="foto" class="bg-white border border-[#655b5a] py-3.5 px-2 w-11/12 outline-none rounded outline"
+          placeholder="foto">
+        </div>
+        <span *ngIf="agregarVivenciasForm.get('foto')?.hasError('required') && agregarVivenciasForm.get('foto')?.touched"
+        class="text-red-500 flex w-full ml-16">La foto es requerida</span>
+      </div>
+      <!--audio-->
+      <!-- <div class="flex flex-col justify-center items-center p-1 w-full ">
+        <div class="flex flex-col w-full justify-center items-center">
+          <label for="" class="w-11/12 my-2 text-[#655b5a] font-semibold">audio</label>
+          <input formControlName="audio" accept="audio/*" id="audio" style="display: none" id="audio"
+          name="audio" class="bg-white border border-[#655b5a] py-3.5 px-2 w-11/12 outline-none rounded outline"
+          placeholder="audio" (change)="onAudioSelected($event)">
+          <button (click)="empezarGrabacion()">Grabar</button>
+<button (click)="pararGrabacion()" [hidden]="!grabando">Parar</button>
+<audio id="audio-output" [src]="audioUrl" controls></audio>
+        </div>
+        <span *ngIf="agregarVivenciasForm.get('audio')?.hasError('required') && agregarVivenciasForm.get('audio')?.touched"
+        class="text-red-500 flex w-full ml-16">El audio es requerido</span>
+      </div> -->
+      <div class="flex w-full justify-center items-center">
+        <button routerLink="../all-books" type="submit"
+          class="bg-[#655b5a] w-36 mt-5  hover:scale-105 duration-150 hover:bg-[#989da9] flex items-center justify-center border border-[#545452] hover:border-[#204d74]/30 text-sm text-white p-1 py-1.5 mx-3 rounded px-3">
+          Agregar vivencia
+        </button>
+      </div>
+
+    </form>
   </div>
-  <div *ngIf="name == 'info'" class="flex flex-col w-full h-full ">
-    <h1>Hola</h1>
+  <!--Info tab-->
+  <div *ngIf="name == 'info'" class="tab-container">
+    <div class="flex flex-col w-full justify-start items-center h-full">
+      <img src="../../assets//nasser.jpg" alt="img de nasser" class="rounded-full h-40 w-40">
+      <h1 class="mt-5 font-bold text-3xl text-[#655b5a] text-center">Hola, soy Nasser Issa <br> <span class="text-xl">el creador de esta app</span> </h1>
+      <br>
+      <p class="font-bold my-2">Mis datos: </p>
+      <p>Matrícula: 2019-8015</p>
+      <p class="font-bold my-2">Correo: </p>
+      <p>20198015@itla.edu.do</p>
+    </div>
   </div>
-  <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
 </div>
