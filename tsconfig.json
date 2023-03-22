@@ -2,6 +2,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "esModuleInterop": true,
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -22,6 +23,7 @@
       "es2018", 
       "dom"
     ],
+    "types": ["cordova-sqlite-storage"],
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
